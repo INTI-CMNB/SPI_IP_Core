@@ -1,0 +1,134 @@
+Este es un directorio de sintesis para mediciones de area del core SPI.
+
+Contenido
+---------
+ 1) Procedimiento de Medición
+ 2) Resultados
+ 3) Reuso de archivos
+
+==============================================================================
+1) Procedimiento de Medición
+----------------------------
+
+1.1) Medición con parámetros por defecto
+----------------------------------------
+Para correr un proyecto de sintesis del core SPI con valores de parametros
+por defecto basta con correr:
+
+   $make sys
+
+El resultado se anexa al final de mide.txt.
+
+
+1.2) Mediciónes para varios valores de parámetros
+-------------------------------------------------
+Estas mediciones se realizan mediante el pasaje de generics hacia el Top
+Level a través del archivo .xst, utilizando el script mide.pl y la
+herramienta xil_project, generando como resultado el reporte mide.txt.
+Habiendo especificado la lista de valores de generics (ver más abajo), para
+correr las mediciones basta con correr:
+
+   $make testsev
+
+
+1.2.1) mide.pl
+--------------
+El script mide.pl toma una lista de generics de un archivo en formato csv,
+arma un makefile mide.sub.mak y corre el make. Este make corre un proceso  de
+síntensis por cada juego de parámetros especificados usando xil_project. Las
+dependencias de la generación del reporte son: el achivo mide.xilprj, los
+includes que se especifican en él y la lista de valores de generics.
+
+
+1.2.2) Lista de valores de generics
+-----------------------------------
+El nombre de archivo con los juegos de generics se debe especificar en la
+variable 'GEN_LIST' del archivo Makefile, y su contenido deberá tener el
+siguiente formato:
+
+GEN_1, GEN_2, ..., GEN_N
+val_1_g1,  val_1_g2, ...,val_1_gN
+val_2_g1,  val_2_g2, ...,val_2_gN
+...
+val_M_g1,  val_M_g2, ...,val_M_gN
+
+
+
+==============================================================================
+2) Resultados
+------------------------------
+Este item es hecho considerando:
+* Revision: 1.76 - vie nov 19 11:01:44 ART 2010
+* Entity: Test | Part: xc3s400aft256-4 | Optimized for: Area_Strong
+* Synthesis tool: Xilinx 10.1.02 K.37 (lin)
+* xil_project.pl version: 0.4.2
+
+
+2.1) SPI Controller standalone
+------------------------------
+Flip Flops     35/7168  0.49 %
+LUTs           48/7168  0.67 % (48/0 logic/route 100.00 %)
+Slices         29/3584  0.81 %
+Max. Clock      138.14  MHz ( 7.24 ns)
+
+
+2.2) SPI_WB - BRAMS vs RAM distribuida
+--------------------------------------
+La siguiente tabla muestra la cantidad de LUTs ocupadas por el core completo
+considerando Tx/Rx FIFOs resueltas con BlockRAMs o RAM distribuida, para
+diferentes valores de profundidad.
+
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| ADDR_W/DEPTH   1/1   1/2   2/4   3/8   4/16   5/32   6/64   7/128   8/256 |
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| LUTs_BRAMS      70    82    89    98    104    121    128     130     136 |
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| LUTs_RAM_DIST   70   114   121   130    136    193    296     466     840 |
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Se puede ver que para valores de profundidad menores a 16, el aumento de LUTs
+en relación al tamaño del core "básico" (DEPTH=1) es bajo. Para valores de
+profundidad mayores a 16, el aumento relativo comienza a ser mayor.
+De todas maneras, la conveniencia de usar una u otra opción dependerá de cada
+caso.
+
+Nota: Cuando se trabaja con BRAMs el core utiliza 2 BRAMs como mínimo, esto es
+porque son 2 FIFOs, una de Tx y una de Rx. Por lo que la comparación que se
+puede hacer sería que para DEPTH=2 a 16 el trade-off es entre usar 32 LUTs
+o 2 BRAMs.
+
+En el caso en que se quiera utilizar el core SPI_WB sin BRAMs dentro de un
+proyecto de síntesis de Xilinx en el cual puede haber otros cores que sí
+utilicen BRAMs, se puede agregar en el archivo de constraints .xcf la
+siguiente línea:
+
+   MODEL SPI_WB ram_style = distributed;
+
+Esto le indicará al sintetizador de Xilinx que para componentes del tipo
+"SPI_WB" la RAM se implementará con LUTs. Por defecto, el resto de los
+cores tendrán el atributo "ram_style" seteado como automático.
+
+
+2.3) Impacto de parámetros en uso de área
+-----------------------------------------
+Sintetizando sólo el spi_controller, se evaluó el efecto del cambio de los
+siguientes parámetros respecto a su valor por defecto: SCLK_PHASE,
+SCLK_POLARITY, MSB_IS_FIRST y DR_IRQ_ALWS. No se observa impacto importante
+sobre el área ocupada.
+Sintetizando el core completo, se observa un aumento de 6 LUTs con
+SCLK_PHASE='1'.
+También se verificó el impacto de los parámetros  SLAVE_QTT y SS_BITS_QTT,
+comprobandose un efecto esperable.
+
+
+
+==============================================================================
+3) Reuso de archivos
+--------------------
+Para reutilizar los archivos para medición en otros proyectos, se debería:
+1. Crear archivo .xilprj correspondiente al proyecto de síntesis.
+2. Copiar en el directorio de proyecto el script mide.pl y el Makefile.
+3. Crear lista con valores de generics; especificar nombre de este archivo en
+la variable 'GEN_LIST' del Makefile.
+5. Adaptar el resto del Makefile (target 'pre', nombre del proyecto, etc.)
+

@@ -1,0 +1,11 @@
+Board=xilinx_sp601
+Project=mide_s6
+Top=Test
+Goal=Area_Strong
+DirLevel=4
+Source=mide_s6.vhdl
+Include=SPI,spi_cache
+Include=utils
+Include=SPI,spi
+Include=mems,fifo
+

@@ -1,0 +1,22 @@
+Este es un proyecto de síntesis para probar el correcto funcionamiento del
+core SPI Controller utilizando la placa de evaluación Avnet Spartan 3A
+Evaluation Kit board.
+
+Mediante el SPI Controller, el Top Level lee el ID de la memoria flash SPI
+S25FL periódicamente (una vez por segundo) y evalúa si la lectura fue correcta.
+El estado de la operación es reportado a través de los LEDs de la placa, usando
+los siguientes códigos:
+
+OK   = "1111" (lectura ok)
+BAD  = "0110" (mala lectura)
+INIT = "0001" (lectura iniciada)
+BUSY = "0010" (controlador ocupado)
+
+Para poder establecer comunicación con la memoria, además de las lineas SPI,
+las siguientes lineas son manejadas:
+
+* fshce_o : Flash_CE de la placa. En estado alto habilita la comunicación
+entre la FPGA y la memoria (Chip enable del MUX U20).
+
+* sfhld_o : Hold# pin de la memoria S25FL. En estado bajo detiene cualquier
+comunicación con la memoria.

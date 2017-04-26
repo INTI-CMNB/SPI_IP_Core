@@ -1,0 +1,19 @@
+Este es un directorio de sintesis para mediciones de area del core SPI_CACHE.
+Este proyecto es similar al proyecto del directorio SPI/FPGA/mide.
+
+Resultados:
+----------
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| CACHE_LINE_L/LINES_QTT    1     2     4     8     16     32  |
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|     8                    72    86   114   166    304    597  |
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|     16                   67    78   105   162    289    557  |
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|     32                   67    87   103   152    264    526  |
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Todas las mediciones con ADDR_W=16  y DATA_W=16.
+
+Se observa que, para igual cantidad de líneas, el área consumida disminuye
+al aumentar el tamaño de la linea.
+TODO: ver por qué!

@@ -1,0 +1,8 @@
+Board=avnet_s3a
+Project=mide
+Top=Test
+Goal=Area_Strong
+Source=mide.vhdl
+Include=utils,stdlib_pkg.vhdl
+Include=SPI,spi
+Include=mems,fifo

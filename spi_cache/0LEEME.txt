@@ -1,0 +1,6 @@
+Descripción
+-----------
+Este proyecto implementa una memoria cache de solo lectura que se conecta a
+una memoria externa mediante SPI.
+
+

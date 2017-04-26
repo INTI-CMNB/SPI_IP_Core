@@ -1,0 +1,262 @@
+Copyright (c) 2010 Francisco Salomón <fsalomon@inti.gob.ar>
+Copyright (c) 2010 Instituto Nacional de Tecnología Industrial
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ 02111-1307, USA
+
+
+Nombre de la biblioteca: SPI
+
+Uso:
+library SPI;
+use SPI.Devices.all;
+
+Dependencias:
+ vhdlspp
+ mems
+ utils
+
+Dependencias para Testbenchs:
+ ghdl
+ utils
+ wb_handler
+
+
+Descripción:
+-----------
+  Este core implementa una interfaz SPI Maestro, compatible con bus WISHBONE.
+Posee FIFOs de profundidad configurable para transmisión y recepción y
+registros de control y estado accesibles a través del bus WISHBONE (ver
+Registros). Además, cuenta con salidas de interrupción por dato disponible y
+por desborde en FIFO de transmisión y/o recepción (ver Interrupciones).
+  El bus SPI (Serial Peripheral Interface), según describe el SPI Block Guide
+de Motorola (pdf:1:info/S12SPIV3.pdf), es un canal sincrónico full-duplex que
+utiliza cuatro líneas (transmisión, recepción, reloj y selección de esclavo)
+entre el maestro y el esclavo seleccionado; se utiliza una línea de selección
+individual para cada esclavo conectado al bus.
+  Más adelante se detallan parametros de configuración, modalidades de
+transacciones, etc.
+
+
+Entidades disponibles en la biblioteca:
+--------------------------------------
+  Las entidades definidas en spi_pkg.vhdl son:
+- SPI_WB: Descripción principal del core. Contiene controlador, tx y rx FIFOs,
+generación de interrupciones e implementa la interfaz WISHBONE. Corresponde a
+la descripción spi_wb.vhdl.
+- SPI_Controller: Controlador SPI Maestro. No posee interfaz WISHBONE ni
+buffers para transacción. Corresponde a la descripción spi_controller.vhdl.
+- S25FL_sim: Simulador de memoria flash SPI S25FL de Spansion utilizado en
+testbench. Corresponde a la descripción testbench/s25fl_simulator.vhdl.
+
+
+Testbench:
+---------
+  Dentro del directorio ./testbench se encuentran descripciones de testbenchs
+para SPI_Controller (spi_controller_tb.vhdl) y para SPI_WB (spi_tb.vhdl).
+Ambas descripciones son no sintetizables y simulan realizar diferentes
+transacciones con una memoria S25FL. Se accede a estos testbenchs mediante el
+comando make desde el directorio principal.
+
+
+Generics:
+--------
+- FIFO_DEPTH: [natural] Profundidad de las FIFOs de transmisión y recepción;
+debe ser menor o igual que 2^FIFO_ADDR_W.
+- FIFO_ADDR_W: [natural] Ancho del bus de direcciones de las FIFOs de
+transmisión y recepción; debe ser mayor o igual que log_2(FIFO_DEPTH).
+- SCLK_PHASE: [std_logic] Fase del reloj serie. Junto con SCLK_POLARITY,
+determina el modo de transacción.
+- SCLK_POLARITY:[std_logic] Polaridad del reloj serie. Junto con SCLK_PHASE,
+determina el modo de transacción.
+- SLAVE_QTT: [positive] Cantidad de dispositivos esclavos seleccionables, es
+decir, número de líneas externas de selección.
+- SS_BITS_QTT: [positive] Cantidad de bits disponibles para selección de
+esclavo.
+- MSB_IS_FIRST: [boolean] Establece si el bit más significativo de la
+transacción es enviado primero.
+- DR_IRQ_ALWS: [boolean] Establece si el controlador realiza pedidos de
+interrupción en cada evento de dato disponible.
+- DATA_W: [positive] Ancho de bus de datos, FIFOs y tamaño de transacción.
+
+
+Registros:
+---------
+Por defecto son de 8 bit, pero esto es configurable a través del generic
+DATA_W.
+ -------------------------------------------------------------------------
+|  Registro   | Dir |    Modo   |               Contenido                 |
+--------------------------------------------------------------------------
+| tx_fifo_in  |  0  | escritura |           (datos a transmitir)          |
+| rx_fifo_out |  0  |  lectura  |             (datos recibidos)           |
+|  control    |  1  | escritura | x|.. | x    |   ss |     ...      |ss   |
+|  estado     |  1  |  lectura  | x|x|x|oer_tx|oer_rx|rx_rdy|tx_free|busy |
+ -------------------------------------------------------------------------
+
+- tx_fifo_in: dirección de escritura de la FIFO de transmisión
+
+- rx_fifo_out: dirección de lectura de la FIFO de recepción
+
+- control:
+   x: reservado
+   s: bits de seleción de esclavo; la cantidad depende del generic
+   SS_BITS_QTT.
+
+- estado:
+   x: reservado
+   oer_tx: indica overflow en FIFO de transmisión
+   oer_tx: indica overflow en FIFO de recepción
+   rx_rdy: indica dato disponible en FIFO de recepción
+   tx_free: indica que la FIFO de transmisión no está llena
+   busy: indica si el controlador está realizando una transacción
+
+
+Transacciones:
+-------------
+  La modalidad de transacción depende de su longitud (DTR_LENGTH).
+  Cuando DTR_LENGTH es menor o igual a DATA_W*FIFO_DEPTH, la transacción se
+inicia colocando los datos a transmitir en la FIFO de transmisión y luego
+se espera la finalización de la misma para leer los datos recibidos (ver
+Lectura de RX FIFO más adelante).
+  Cuando DTR_LENGTH es mayor a DATA_W*FIFO_DEPTH, los datos a transferir se
+deben colocar por partes en la FIFO de transmisión, esperando a que esta
+tenga espacio nuevamente para colocar un nuevo dato, de modo que el esclavo
+se mantenga seleccionado entre la transferencia de las sucesivas partes.
+También se deberán leer los datos recibidos de modo que no se produzca
+desborde en la FIFO de recepción.
+  Más adelante se dan ejemplos de transacciones.
+
+
+Tasa de bit del bus SPI:
+-----------------------
+  La frecuencia de transmisión en el bus SPI será la mitad de la frecuencia
+de la señal que ingrese por la línea de entrada ena_i, de modo que es
+recomendable esta señal sea una división de la señal de clock del sistema.
+En caso de que esta señal ingresada por ena_i se detenga, se detendrá también
+la máquina de tx/rx del controlador.
+
+
+Interrupciones:
+---------------
+  El core cuenta con líneas de salida para pulsos de interrupción por dato
+disponible y por error de overflow en transmisión y recepción. Estas se
+detallan a continuación.
+
+- Interrupción por dato disponible: El comportamiento de esta línea depende
+del generic DR_IRQ_ALWS. Si este es verdadero, se realizará un pedido de
+interrupción por cada DATA_W bits transmitidos, aún cuando el esclavo
+permanezca seleccionado, es decir, aún cuando la transacción total no haya
+finalizado. Si DR_IRQ_ALWS es falso, se realizará un único pedido de
+interrupción al finalizar la transacción total, es decir, cuando el
+controlador no tenga más datos por transmitir, por lo cual el esclavo será
+liberado.
+
+- Interrupción por error de overflow: a través de esta línea se realizarán
+pedidos de interrupción por desborde en FIFOs de transmisión o recepción.
+Luego de esto, es recomendable realizar una lectura del registro de estado,
+donde se detalla la fuente de error.
+
+
+Lectura de RX FIFO:
+------------------
+  Es importante aclarar que, dada la arquitectura de las FIFOs utilizadas,
+para la lectura consecutiva de más de un valor de la FIFO de recepción debe
+agregarse una espera de un ciclo de reloj al inicio de la lectura. Como
+ejemplo, ver ./testbench/spi_tb.vhdl.
+
+
+Ejemplo de instanciación:
+------------------------
+(ver componente "dut" en ./testbench/spi_tb.vhdl)
+
+
+Ejemplos de transacciones:
+-------------------------
+  Se dan dos ejemplos de transacciones, representativos de las dos
+modalidades de transacción.
+  
+- Transacción con DTR_LENGTH menor o igual a DATA_W*FIFO_DEPTH
+Este es el caso más simple. Se utiliza DR_IRQ_ALWS=false, de modo que el
+core solicita interrupción de dato listo solo al final de la transacción.
+El ciclo de transacción sería:
+1- Chequear que el controlador no se encuentra ocupado leyendo el registro de
+estado.
+2- Si hay más de un esclavo conectado al bus, seleccionar el correcto
+escribiendo su número en el registro de control.
+3- Colocar los datos transferir en la FIFO de transmisión del controlador
+mediante sucesivas escrituras en el registro tx_fifo_in.
+4- Esperar el pedido de interrupción de dato listo y leer los datos recibidos,
+mediante sucesivas lecturas del registro rx_fifo_out.
+
+- Transacción con DTR_LENGTH=2, FIFO_DEPTH=1 y DR_IRQ_ALWS=true
+El ciclo de transacción sería el siguiente:
+1- Chequear que el controlador no se encuentra ocupado leyendo el registro de
+estado.
+2- Si hay más de un esclavo conectado al bus, seleccionar el correcto
+escribiendo su número en el registro de control.
+3- Poner el primer dato a transferir en "tx_fifo_in". Esperar a que
+"tx_fifo_in" se libere nuevamente y colocar el segundo dato a transferir.
+4- Esperar el pedido de interrupción y leer el primer dato recibido,
+disponible en "rx_fifo_out".
+5- Esperar el siguiente pedido de interrupción y leer el segundo dato
+recibido.
+
+
+Mediciones de área:
+------------------
+  En el directorio ./FPGA/mide se encuentra el archivo Makefile que permite
+realizar varias sintesis del core SPI_WB para una FPGA Spartan 3A
+xc3s400aft256-4 de Xilinx con diferentes valores de generics, lo cual permite
+evaluar los recursos consumidos por el core para direfentes configuraciones.
+Los resultados de éstas sintesis se encuentran en el archivo mide.txt del
+mismo directorio.
+
+
+Conexiones:
+----------
+SPI_WB:
+- Generics:
+      -- FIFO
+      FIFO_ADDR_W   : natural:=3;
+      FIFO_DEPTH    : natural:=6;
+      -- SPI
+      SCLK_PHASE    : std_logic:='0';
+      SCLK_POLARITY : std_logic:='0';
+      SLAVE_QTT     : positive:=2;
+      SS_BITS_QTT   : positive:=1;
+      MSB_IS_FIRST  : boolean:=false;
+      -- FIFO, SPI y WISHBONE
+      DR_IRQ_ALWS   : boolean:=false;
+      DATA_W        : positive:=8
+- Ports:
+      -- Interfaz WISHBONE
+      wb_clk_i      : in  std_logic;
+      wb_rst_i      : in  std_logic;
+      wb_adr_i      : in  std_logic_vector(0 downto 0);
+      wb_dat_i      : in  std_logic_vector(DATA_W-1 downto 0);
+      wb_dat_o      : out std_logic_vector(DATA_W-1 downto 0);
+      wb_we_i       : in  std_logic;
+      wb_stb_i      : in  std_logic;
+      wb_ack_o      : out std_logic;
+      -- SPI
+      ena_i         : in  std_logic;
+      miso_i        : in  std_logic;
+      sclk_o        : out std_logic;
+      mosi_o        : out std_logic;
+      ss_o          : out std_logic_vector(SLAVE_QTT-1 downto 0);
+      -- Salidas de interrupción por dato disponible y error por overflow
+      dr_irq_o      : out std_logic;
+      oe_irq_o      : out std_logic
+
+

@@ -1,0 +1,13 @@
+Revision: 1.108 - mar ago 30 11:18:34 ART 2016
+Entity: MCP300x_LEDs_Kefir_I | Part: iCE40HX4K-TQ144 | Optimized for: N/A | Constrained: 
+Synthesis tool: Lattice 2016.02.27810
+xil_project.pl version: 0.5.7
+
+Flip Flops:    27/3520     0.77 %
+LUTs:          44/3520     1.25 %
+Cells:         45/3520     1.28 %
+--------------------------------------------------------------------------------
+Max. Clock:   138.60 MHz ( 7.22 ns) [CLK]
+********************************************************************************
+
+

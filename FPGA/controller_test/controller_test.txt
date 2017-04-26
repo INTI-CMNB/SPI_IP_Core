@@ -1,0 +1,12 @@
+Revision: 1.78 - mar nov 30 14:52:08 ART 2010
+Entity: controller_test | Part: xc3s400aft256-4 | Optimized for: Area | Constrained: ../controller_test.xcf
+Synthesis tool: Xilinx 10.1.02 K.37 (lin)
+xil_project.pl version: 0.4.2
+
+Flip Flops:   131/7168  1.83 %
+LUTs:         128/7168  1.79 % (105/23 logic/route 82.03 %)
+Slices:        89/3584  2.48 %
+Max. Clock:  140.11 MHz ( 7.14 ns)
+
+
+

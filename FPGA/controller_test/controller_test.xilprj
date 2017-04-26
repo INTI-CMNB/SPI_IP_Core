@@ -1,0 +1,10 @@
+Board=avnet_s3a
+Project=controller_test
+Goal=Area
+Source=controller_test.vhdl
+Include=SPI,spi,Work/spi_pkg.vhdl
+Include=SPI,spi,spi_controller.vhdl
+Include=SPI,spi,Work/spi_tb_pkg.vhdl
+Include=utils,stdlib_pkg.vhdl
+Include=utils,simple_div.vhdl
+ExtraClean=rwork_clean

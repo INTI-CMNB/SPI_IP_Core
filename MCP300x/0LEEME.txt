@@ -1,0 +1,27 @@
+MCP300x
+-------
+Autor: Salvador E. Tropea
+
+  Este core implementa una comunicación SPI particular. Está pensado para los
+conversores A/D MCP3004 y MCP3008 de Microchip.
+
+La comunicación es más o menos así:
+
+1) Se supone que arrancamos con /CS en 1, esto es IDLE.
+2) Bajamos /CS a 0 y comenzamos a generar la señal CLK. Esta arranca en 0.
+     Los datos los deberíamos cambiar cuando CLK es 0 y el otro extremo samplearlos en el flanco
+   ascendente.
+3) El primer bit que ponemos en AD_Din es el de START que es '1'.
+4) El 2do bit elige entre modo single end y diferencial, '1' para S.E.
+5) Los siguientes 3 bits (3, 4 y 5) son D2,D1,D0 correspondientes al canal a samplear (CH0 a CH7)
+   Esto es lo último que transmitimos, el resto del ciclo no importa en que dejemos AD_Din.
+6) Luego de esto hay un ciclo en que ninguno de los dos extremos transmite. (6to clock)
+   Acá se realiza el sample & hold.
+7) Los bits que envía el A/D también cambian cuando el clock es 0 y se pueden samplear en el flanco
+   ascendente.
+   El primer bit que envía el A/D es '0' (7mo clock)
+8) Los siguientes 10 ciclos son B9 a B0 de la conversión (8 a 17)
+9) Terminado el 17avo ciclo llevamos /CS a 1 por un ciclo, el 18avo. Finalizando así un ciclo y
+   pudiendo comenzar uno nuevo.
+
+   Estos son los 18 ciclos que lleva la comunicación.

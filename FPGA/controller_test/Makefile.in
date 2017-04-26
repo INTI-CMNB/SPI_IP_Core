@@ -1,0 +1,14 @@
+#extraclean
+rwork_clean:
+	rm -rf ../../../SPI/Work/
+
+#target for pkg
+../../../SPI/Work/spi_pkg.vhdl  ../../../SPI/Work/spi_tb_pkg.vhdl :
+	make -C ../../../SPI Work Work/spi_pkg.vhdl Work/spi_tb_pkg.vhdl
+
+#transfer to parallel flash
+transfer-par: $(TARGET) do-transfer-par
+
+do-transfer-par: $(TARGET)
+	astriaekipro -iEWYF  $<
+

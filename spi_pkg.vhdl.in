@@ -1,0 +1,58 @@
+------------------------------------------------------------------------------
+----                                                                      ----
+----  SPI package                                                         ----
+----                                                                      ----
+----  This file is part FPGA Libre project http://fpgalibre.sf.net/       ----
+----                                                                      ----
+----  Description:                                                        ----
+----    Package file for spi                                              ----
+----                                                                      ----
+----  To Do:                                                              ----
+----  -                                                                   ----
+----                                                                      ----
+----  Author:                                                             ----
+----    - Francisco Salomón, fsalomon@inti.gob.ar                         ----
+----                                                                      ----
+------------------------------------------------------------------------------
+----                                                                      ----
+---- Copyright (c) 2010 Francisco Salomón <fsalomon@inti.gob.ar>          ----
+---- Copyright (c) 2010 Instituto Nacional de Tecnología Industrial       ----
+----                                                                      ----
+---- Distributed under the GPL v2 or newer license                        ----
+----                                                                      ----
+------------------------------------------------------------------------------
+----                                                                      ----
+---- Design unit:      Devices (Package)                                  ----
+---- File name:        spi_pkg.vhdl                                       ----
+---- Note:             None                                               ----
+---- Limitations:      None known                                         ----
+---- Errors:           None known                                         ----
+---- Library:          None                                               ----
+---- Dependencies:     IEEE.std_logic_1164                                ----
+----                   IEEE.numeric_std                                   ----
+---- Target FPGA:      Spartan 3A (XC3S400-FT256)                         ----
+---- Language:         VHDL                                               ----
+---- Wishbone:         SLAVE (rev B.3)                                    ----
+---- Synthesis tools:  Xilinx Release 10.1i - xst K.37                    ----
+---- Simulation tools: GHDL [Sokcho edition] (0.2x)                       ----
+---- Text editor:      SETEdit 0.5.x                                      ----
+----                                                                      ----
+------------------------------------------------------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+package Devices is
+   -- SPI Controller
+   @component:spi_controller.vhdl@
+
+   -- SPI Master Controller
+   @component:spi_master.vhdl@
+
+   -- SPI Wishbone
+   @component:spi_wb.vhdl@
+
+   -- MCP300x
+   @component:MCP300x/mcp300x.vhdl@
+end package Devices;
+

@@ -1,0 +1,320 @@
+Synthesis for default generics.
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 14:29:18 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   124/18224    0.68 %
+LUTs:         103/9112     1.13 % (75/28 logic/route 72.82 %)
+Slices:        47/2278     2.06 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   74.67 MHz (13.39 ns)
+
+
+Synthesis for generics:
+   LINES_QTT=1
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:50:05 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:    88/18224    0.48 %
+LUTs:          72/9112     0.79 % (51/21 logic/route 70.83 %)
+Slices:        30/2278     1.32 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   141.96 MHz ( 7.04 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=2
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:51:03 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   103/18224    0.57 %
+LUTs:          86/9112     0.94 % (61/25 logic/route 70.93 %)
+Slices:        36/2278     1.58 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   99.13 MHz (10.09 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=4
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:52:01 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   132/18224    0.72 %
+LUTs:         114/9112     1.25 % (77/37 logic/route 67.54 %)
+Slices:        45/2278     1.98 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   85.68 MHz (11.67 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=8
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:53:03 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   189/18224    1.04 %
+LUTs:         166/9112     1.82 % (113/53 logic/route 68.07 %)
+Slices:        69/2278     3.03 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   70.49 MHz (14.19 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=16
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:54:13 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   302/18224    1.66 %
+LUTs:         304/9112     3.34 % (209/95 logic/route 68.75 %)
+Slices:       109/2278     4.78 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   43.41 MHz (23.04 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=32
+   CACHE_LINE_L=8
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:55:34 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   528/18224    2.90 %
+LUTs:         597/9112     6.55 % (415/182 logic/route 69.51 %)
+Slices:       201/2278     8.82 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   44.64 MHz (22.40 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=1
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:56:52 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:    87/18224    0.48 %
+LUTs:          67/9112     0.74 % (47/20 logic/route 70.15 %)
+Slices:        26/2278     1.14 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   167.45 MHz ( 5.97 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=2
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 15:58:22 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   101/18224    0.55 %
+LUTs:          87/9112     0.95 % (62/25 logic/route 71.26 %)
+Slices:        39/2278     1.71 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   98.81 MHz (10.12 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=4
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:00:04 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   128/18224    0.70 %
+LUTs:         105/9112     1.15 % (76/29 logic/route 72.38 %)
+Slices:        45/2278     1.98 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   85.30 MHz (11.72 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=8
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:01:27 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   181/18224    0.99 %
+LUTs:         162/9112     1.78 % (115/47 logic/route 70.99 %)
+Slices:        60/2278     2.63 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   61.30 MHz (16.31 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=16
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:02:38 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   286/18224    1.57 %
+LUTs:         289/9112     3.17 % (207/82 logic/route 71.63 %)
+Slices:        98/2278     4.30 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   42.46 MHz (23.55 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=32
+   CACHE_LINE_L=16
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:04:37 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   495/18224    2.72 %
+LUTs:         557/9112     6.11 % (420/137 logic/route 75.40 %)
+Slices:       196/2278     8.60 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   38.93 MHz (25.69 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=1
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:05:53 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:    86/18224    0.47 %
+LUTs:          67/9112     0.74 % (47/20 logic/route 70.15 %)
+Slices:        31/2278     1.36 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   135.28 MHz ( 7.39 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=2
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:06:55 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:    99/18224    0.54 %
+LUTs:          78/9112     0.86 % (57/21 logic/route 73.08 %)
+Slices:        26/2278     1.14 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   94.41 MHz (10.59 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=4
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:07:57 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   124/18224    0.68 %
+LUTs:         103/9112     1.13 % (75/28 logic/route 72.82 %)
+Slices:        47/2278     2.06 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   74.67 MHz (13.39 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=8
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:09:06 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   173/18224    0.95 %
+LUTs:         152/9112     1.67 % (113/39 logic/route 74.34 %)
+Slices:        66/2278     2.90 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   57.38 MHz (17.43 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=16
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:10:19 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   270/18224    1.48 %
+LUTs:         264/9112     2.90 % (199/65 logic/route 75.38 %)
+Slices:        96/2278     4.21 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   43.38 MHz (23.05 ns)
+
+
+
+Synthesis for generics:
+   LINES_QTT=32
+   CACHE_LINE_L=32
+----------------------------------------------------------------------
+Revision: 1.106 - vie feb 24 16:12:00 ART 2012
+Entity: Test | Part: xc6slx16-2-csg324 | Optimized for: Area_Strong | Constrained: no
+Synthesis tool: Xilinx 11.3 L.57 (lin)
+xil_project.pl version: 0.4.8
+
+Flip Flops:   463/18224    2.54 %
+LUTs:         526/9112     5.77 % (414/112 logic/route 78.71 %)
+Slices:       204/2278     8.96 %
+BRAMs:          1/96       1.04 %
+Max. Clock:   38.14 MHz (26.22 ns)
+
+
+

@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.62 (w)1999-2014 BSI
+[*] Mon Apr 10 16:35:27 2017
+[*]
+[dumpfile] "/home/salvador/0Data/FPGA/fpgacores/SPI/Work/spi_controller_tb.ghw"
+[dumpfile_mtime] "Mon Apr 10 16:30:29 2017"
+[dumpfile_size] 18831
+[savefile] "/home/salvador/0Data/FPGA/fpgacores/SPI/testbench/spi_controller_tb.sav"
+[timestart] 0
+[size] 1912 600
+[pos] -25 375
+*-29.982798 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.spi_controller_tb.
+[treeopen] top.spi_controller_tb.mem_sim.
+[sst_width] 230
+[signals_width] 78
+[sst_expanded] 1
+[sst_vpaned_height] 142
+@28
+top.spi_controller_tb.clk
+top.spi_controller_tb.rst
+top.spi_controller_tb.ena
+top.spi_controller_tb.start
+@29
+top.spi_controller_tb.ena
+@28
+top.spi_controller_tb.c_busy
+top.spi_controller_tb.c_irq
+top.spi_controller_tb.mem_sim.cs_i
+top.spi_controller_tb.sclk
+top.spi_controller_tb.mosi
+top.spi_controller_tb.miso
+[pattern_trace] 1
+[pattern_trace] 0

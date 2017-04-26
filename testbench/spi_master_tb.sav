@@ -1,0 +1,49 @@
+[*]
+[*] GTKWave Analyzer v3.3.62 (w)1999-2014 BSI
+[*] Wed Apr 12 12:53:55 2017
+[*]
+[dumpfile] "/home/salvador/0Data/FPGA/fpgacores/SPI/Work/spi_master_tb.ghw"
+[dumpfile_mtime] "Tue Apr 11 13:59:27 2017"
+[dumpfile_size] 20338
+[savefile] "/home/salvador/0Data/FPGA/fpgacores/SPI/testbench/spi_master_tb.sav"
+[timestart] 0
+[size] 1912 1025
+[pos] -1 -1
+*-30.131247 1350000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.spi_master_tb.
+[treeopen] top.spi_master_tb.mem_sim.
+[sst_width] 230
+[signals_width] 118
+[sst_expanded] 1
+[sst_vpaned_height] 290
+@28
+top.spi_master_tb.clk
+top.spi_master_tb.rst
+top.spi_master_tb.ena
+top.spi_master_tb.start
+top.spi_master_tb.c_busy
+top.spi_master_tb.dut.state
+top.spi_master_tb.dut.bit_cnt
+top.spi_master_tb.c_irq
+@200
+-
+@29
+top.spi_master_tb.ss
+@28
+top.spi_master_tb.sclk
+top.spi_master_tb.mosi
+top.spi_master_tb.miso
+@200
+-
+@28
+top.spi_master_tb.mem_sim.cs_i
+top.spi_master_tb.mem_sim.so_o
+@22
+#{top.spi_master_tb.mem_sim.tx_r[7:0]} top.spi_master_tb.mem_sim.tx_r[7] top.spi_master_tb.mem_sim.tx_r[6] top.spi_master_tb.mem_sim.tx_r[5] top.spi_master_tb.mem_sim.tx_r[4] top.spi_master_tb.mem_sim.tx_r[3] top.spi_master_tb.mem_sim.tx_r[2] top.spi_master_tb.mem_sim.tx_r[1] top.spi_master_tb.mem_sim.tx_r[0]
+#{top.spi_master_tb.mem_sim.rx_r[7:0]} top.spi_master_tb.mem_sim.rx_r[7] top.spi_master_tb.mem_sim.rx_r[6] top.spi_master_tb.mem_sim.rx_r[5] top.spi_master_tb.mem_sim.rx_r[4] top.spi_master_tb.mem_sim.rx_r[3] top.spi_master_tb.mem_sim.rx_r[2] top.spi_master_tb.mem_sim.rx_r[1] top.spi_master_tb.mem_sim.rx_r[0]
+@28
+top.spi_master_tb.mem_sim.t_change_cs
+top.spi_master_tb.mem_sim.tranf_state
+[pattern_trace] 1
+[pattern_trace] 0

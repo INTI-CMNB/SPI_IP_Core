@@ -1,0 +1,8 @@
+Test de comunicación con el MCP3008 de la Kéfir I.
+Adquiere en forma constante desde el canal 0 (A6 del conector) y muestra los 4 MSBs en los LEDs.
+
+El módulo de manejo del MCP3008 usando un número de canal fijo ocupó:
+FFs:   19
+LUT4s: 28 (3 Carrys)
+
+Lo probé a 1 MHz de reloj SPI (2 MHz de enable)
