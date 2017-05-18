@@ -1,0 +1,6 @@
+Board=kefir_i_hx4k
+Project=mcp300x_leds_kefir_i
+Top=MCP300x_LEDs_Kefir_I
+Goal=Area_Strong
+Include=SPI,mcp300x_v
+Source=mcp300x_leds_kefir_i.v

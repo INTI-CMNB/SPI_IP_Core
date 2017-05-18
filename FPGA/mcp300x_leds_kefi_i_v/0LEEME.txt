@@ -5,6 +5,7 @@ El módulo de manejo del MCP3008 usando un número de canal fijo ocupó:
 FFs:   13
 LUT4s: 28 (3 Carrys)
 
-El circuito completo: 21 FFs y 38 LUTs
+El circuito completo: 21 FFs 38 LUTs
+Con IceStorm:         20 FFs 41 LUTs
 
 Lo probé a 1 MHz de reloj SPI (2 MHz de enable)

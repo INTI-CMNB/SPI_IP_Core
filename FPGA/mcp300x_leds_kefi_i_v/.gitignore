@@ -1,0 +1,7 @@
+mcp300x_leds_kefir_i.prj
+mcp300x_leds_kefir_i.pcf
+Makefile
+command_wrapper.sh
+Work
+gen
+gen_icestorm

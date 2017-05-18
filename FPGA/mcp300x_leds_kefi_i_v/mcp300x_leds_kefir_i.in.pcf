@@ -1,0 +1,35 @@
+###################################
+# Kéfir I HX4K Pin-pout
+# Family & Device:    iCE40HX4K
+# Package:            TQ144
+###################################
+
+# Capacitive-sense buttons
+# set_io BTN1 136
+# set_io BTN2 134
+# set_io BTN3 128
+# set_io BTN4 122
+
+# LED outputs
+set_io LED1 137
+set_io LED2 135
+set_io LED3 129
+set_io LED4 121
+
+# Clock input
+set_io CLK 49
+
+# SPI Flash enable control
+set_io SS_B 71
+
+# MCP3008 A/D
+set_io AD_CS   101
+set_io AD_Din  102
+set_io AD_Dout 104
+set_io AD_Clk  105
+
+# set_io ARDU00 138
+# set_io ARDU01 141
+# set_io ARDU02 143
+# set_io ARDU03 1
+
