@@ -54,7 +54,8 @@ use IEEE.numeric_std.all;
 
 entity MCP300x is
    generic(
-      FULL_RESET : boolean:=true); -- Reset affects all regs, even when not needed
+      FULL_RESET : std_logic:='1'); -- Reset affects all regs, even when not needed
+                                    -- Using std_logic for Verilog compat
    port(
       -- System
       clk_i    : in  std_logic; -- System clock
@@ -94,7 +95,7 @@ begin
       if rising_edge(clk_i) then
          if rst_i='1' then
             state  <= idle;
-            if FULL_RESET then
+            if FULL_RESET='1' then
                data_r   <= (others => '0');
                cnt      <= (others => '0');
                ad_clk_r <= '0';
