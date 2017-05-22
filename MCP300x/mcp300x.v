@@ -72,8 +72,9 @@ module MCP300x
     input        ad_dout_i // SPI A/D Dout (MISO)
    );
 
-localparam IDLE=0, TX=1, SAMPLE=2, RX=3, EOC=4; // state_t
-reg  [2:0] state=IDLE;
+// One-hot FSM
+localparam IDLE=5'b00001, TX=5'b00010, SAMPLE=5'b00100, RX=5'b01000, EOC=5'b10000; // state_t
+reg  [4:0] state=IDLE;
 reg  [9:0] data_r=0;
 wire [4:0] data_tx;
 reg  [3:0] cnt=0;
@@ -90,74 +91,74 @@ always @(posedge clk_i)
 begin : do_FSM
   if (rst_i)
      begin
-     state=IDLE;
+     state <= IDLE;
      if (FULL_RESET)
         begin
-        data_r=0;
-        cnt=0;
-        ad_clk_r=0;
+        data_r <= 0;
+        cnt <= 0;
+        ad_clk_r <= 0;
         end
      end
   else
      begin
      // Generate the SPI clock all the time
      if (ena_i)
-        ad_clk_r=!(ad_clk_r);
+        ad_clk_r <= !(ad_clk_r);
      case (state)
           IDLE:
              if (start_i && ena_i)
                 begin
-                state=TX;
-                cnt=4;
-                ad_clk_r=0;
+                state <= TX;
+                cnt <= 4;
+                ad_clk_r <= 0;
                 end
           TX:
              if (ena_i && ad_clk_r)
                 begin
                 if (cnt)
-                   cnt=cnt-1;
+                   cnt <= cnt-1;
                 else
-                   state=SAMPLE;
+                   state <= SAMPLE;
                 end
           SAMPLE:
              if (ena_i && ad_clk_r)
                 begin
-                state=RX;
-                cnt=11;
+                state <= RX;
+                cnt <= 11;
                 end
           RX:
              if (ena_i)
                 begin
                 if (!ad_clk_r)
                    begin
-                   data_r={data_r[8:0],ad_dout_i};
-                   cnt=cnt-1;
+                   data_r <= {data_r[8:0],ad_dout_i};
+                   cnt <= cnt-1;
                    end
                 else
                    if (cnt==0)
-                      state=EOC;
+                      state <= EOC;
                 end
           default: // EOC
              if (ena_i && ad_clk_r)
                 begin
                 if (start_i)
                    begin
-                   state=TX;
-                   cnt=4;
+                   state <= TX;
+                   cnt <= 4;
                    end
                 else
-                   state=IDLE;
+                   state <= IDLE;
                 end
      endcase
      end
 end // do_FSM
 
 // Master interface
-assign busy_o=state!=IDLE && state!=EOC ? 1 : 0; // Converting
-assign eoc_o=state==EOC && ena_i ? 1 : 0; // End of conversion
+assign busy_o=state!=IDLE && state!=EOC; // Converting
+assign eoc_o=state==EOC && ena_i; // End of conversion
 assign data_o=data_r; // Last A/D value
 // A/D interface
-assign ad_ncs_o=state==IDLE || state==EOC ? 1 : 0;   // SPI /CS
+assign ad_ncs_o=state==IDLE || state==EOC;   // SPI /CS
 assign ad_clk_o=ad_clk_r;   // SPI clock
 assign ad_din_o=state==TX ? data_tx[cnt] : 0;  // SPI A/D Din (MOSI)
 
